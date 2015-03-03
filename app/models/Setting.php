@@ -1,9 +1,9 @@
-<?php
+<?php namespace App\Models;
 
-
+use App\Models\Selfvalidator;
 use Illuminate\Support\Facades\Cache;
 
-class Setting extends Model {
+class Setting extends Selfvalidator {
 
     /**
      * The database table used by the model.

@@ -5,4 +5,10 @@ Route::group(['prefix' => 'backend', 'namespace' => 'Modules\Backend\Http\Contro
 	Route::get('/',['as'=>'backend', function(){
         return view('backend::index');
     }]);
+
+	Route::controllers([
+		'auth' 		=> 'AuthController',
+		'setting'	=> 'SettingController',
+		'cms'		=> 'CmsController',
+	]);
 });

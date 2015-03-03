@@ -1,6 +1,9 @@
-<?php
+<?php namespace App\Models;
 
-class Model extends Eloquent {
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Validator;
+
+class Selfvalidator extends Model {
     /**
      * Error message bag
      *

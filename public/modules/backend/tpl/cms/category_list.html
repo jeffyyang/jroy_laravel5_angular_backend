@@ -24,7 +24,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="category in categories">
+                <tr ng-hide='categories'>
+                    <td colspan=8 align=center><i class="fa fa-spinner fa-pulse"></i>&nbsp;正在加载...</td>
+                </tr>
+                <tr ng-repeat="category in categories" ng-show='categories'>
                     <td><input type="checkbox" checklist-model="cate.idss" checklist-value="category.id"></td>
                     <td>{{ category.id }}</td>
                     <td>{{ category.pid }}</td>
@@ -44,9 +47,9 @@
                     </td>
                 </tr>
                 </tbody>
-                <tfoot>
+                <tfoot ng-show='categories'>
                 <tr>
-                    <td colspan="5">
+                    <td colspan="8">
                         <div class="row">
                             <div class="col-sm-8 hidden-xs">
                                 <button class="btn btn-sm btn-default" ng-click="checkAll()">全选</button>

@@ -1,7 +1,8 @@
-<?php
+<?php namespace App\Models;
+
 use helpers\Tree;
 
-class Category_cms extends Model {
+class Category_cms extends Selfvalidator {
 
 
     /**

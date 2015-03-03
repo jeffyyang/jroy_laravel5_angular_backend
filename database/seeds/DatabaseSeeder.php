@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
+		$this->initSetting();
 		$this->call('UserTableSeeder');
 	}
 

@@ -1,5 +1,6 @@
-<?php
-class Uploader extends Model {
+<?php namespace App\Models;
+
+class Uploader extends Selfvalidator {
     /**
      * The database table used by the model.
      *

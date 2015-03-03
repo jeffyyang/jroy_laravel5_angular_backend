@@ -1,7 +1,7 @@
-<?php
+<?php namespace App\Models;
 
 
-class Slide extends Model {
+class Slide extends Selfvalidator {
 
     /**
      * The database table used by the model.

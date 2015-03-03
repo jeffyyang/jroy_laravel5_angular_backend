@@ -1,9 +1,9 @@
-<?php
+<?php namespace App\Models;
 
 
-class Post extends Model {
+class Post extends Selfvalidator {
 
-    use Modules\Cms\Helpers\Taging\TaggableTrait;
+    use \Modules\Cms\Helpers\Taging\TaggableTrait;
     /**
      * The database table used by the model.
      *

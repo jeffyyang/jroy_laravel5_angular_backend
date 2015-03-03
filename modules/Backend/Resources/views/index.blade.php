@@ -5,6 +5,7 @@
   <title>后台管理系统 | 柚皮网</title>
   <meta name="description" content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="csrf-token" content="{{ csrf_token() }}" />
   <link rel="stylesheet" href="static/css/bootstrap.css" type="text/css" />
   <link rel="stylesheet" href="static/css/animate.css" type="text/css" />
   <link rel="stylesheet" href="static/css/font-awesome.min.css" type="text/css" />
@@ -31,6 +32,12 @@
   <!-- App -->
 
   <script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
     var base_url = '{{ route("backend") }}';
     var is_login = '{{ \Auth::check() }}';
   </script>

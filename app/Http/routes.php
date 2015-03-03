@@ -12,6 +12,9 @@
 */
 
 Route::get('/', 'WelcomeController@index');
+Route::get('/show', function(){
+	return view('show');
+});
 
 Route::get('home', 'HomeController@index');
 
