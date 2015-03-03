@@ -1,8 +1,8 @@
 <?php
 
-Route::group(['prefix' => 'backend', 'namespace' => 'Modules\Backend\Http\Controllers', 'middleware'=>'\App\Http\Middleware\Admin'], function()
+Route::group(['prefix' => 'backend', 'namespace' => 'Modules\Backend\Http\Controllers'], function()
 {
-	Route::get('/', ['as'=>'backend', 'uses'=>'BackendController@index']);
-	
-	Route::controller('cms', 'CmsController');
+	Route::get('/',['as'=>'backend', function(){
+        return view('backend::index');
+    }]);
 });

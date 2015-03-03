@@ -1,0 +1,60 @@
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">数据库列表</h1>
+</div>
+<div class="wrapper-md" ng-controller="DbListCtrl">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <p><strong class="text-danger">1.所有数据库操作务必谨慎!</strong></p>
+            <p><strong>2.所有操作也可使用命令完成，命令完成备份会自动压缩！<br/>
+                备份: php artisan db:backup<br/>
+                还原: php artisan db:restore 201502278888.sql.gz
+            </strong></p>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <a class="btn m-b-xs w-xs btn-success" ng-click="backup()">现在备份</a><span class="m-l-sm ng-binding">{{ message }}</span>
+        </div>
+        <div class="panel-body b-b b-light">
+            Search: <input id="filter" type="text" class="form-control input-sm w-sm inline m-r"/>
+        </div>
+        <div>
+            <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="5">
+                <thead>
+                <tr>
+                    <th>名称</th>
+                    <th>文件类型</th>
+                    <th>大小</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="item in items">
+                    <td>{{ item.name }}.{{ item.ext }}</td>
+                    <td>{{ item.ext }}</td>
+                    <td>{{ item.size }}</td>
+                    <td>{{ item.time }}</td>
+                    <td>
+                        <div class="btn-group dropdown">
+                            <button class="btn btn-success btn-xs dropdown-toggle" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a ng-click="restore({name:item.name})">恢复</a></li>
+                                <li class="divider"></li>
+                                <li><a href ng-click="delete({name:item.name})">删除</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot class="hide-if-no-paging">
+                <tr>
+                    <td colspan="5" class="text-center">
+                        <ul class="pagination"></ul>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

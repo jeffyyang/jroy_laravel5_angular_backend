@@ -6,7 +6,13 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'CreateBannersTable' => $baseDir . '/database/migrations/2014_08_08_000000_create_banners_table.php',
+    'CreateCmsCategoriesTable' => $baseDir . '/database/migrations/2014_12_26_102105_create_cms_categories_table.php',
+    'CreateCmsPostsTable' => $baseDir . '/database/migrations/2014_12_26_102129_create_cms_posts_table.php',
+    'CreateFilesTable' => $baseDir . '/database/migrations/2014_08_08_000000_create_files_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreateSettingTable' => $baseDir . '/database/migrations/2014_08_08_000000_create_setting_table.php',
+    'CreateSlidesTable' => $baseDir . '/database/migrations/2014_08_08_000000_create_slides_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/File/Iterator.php',
@@ -424,4 +430,5 @@ return array(
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/SessionHandlerInterface.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/Text/Template.php',
+    'UserTableSeeder' => $baseDir . '/database/seeds/UserTableSeeder.php',
 );
