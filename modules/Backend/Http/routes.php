@@ -10,5 +10,6 @@ Route::group(['prefix' => 'backend', 'namespace' => 'Modules\Backend\Http\Contro
 		'auth' 		=> 'AuthController',
 		'setting'	=> 'SettingController',
 		'cms'		=> 'CmsController',
+		'user'		=> 'UserController',
 	]);
 });

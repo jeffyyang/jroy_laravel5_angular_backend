@@ -5,7 +5,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 
 trait AuthenticatesAndRegistersUsers {
-	
+
 	/**
 	 * The Guard implementation.
 	 *
@@ -33,7 +33,7 @@ trait AuthenticatesAndRegistersUsers {
 	/**
 	 * Handle a registration request for the application.
 	 *
-	 * @param  \Illuminate\Foundation\Http\FormRequest  $request
+	 * @param  \Illuminate\Http\Request  $request
 	 * @return \Illuminate\Http\Response
 	 */
 	public function postRegister(Request $request)
@@ -71,7 +71,7 @@ trait AuthenticatesAndRegistersUsers {
 	public function postLogin(Request $request)
 	{
 		$this->validate($request, [
-			'email' => 'required', 'password' => 'required',
+			'email' => 'required|email', 'password' => 'required',
 		]);
 
 		$credentials = $request->only('email', 'password');
@@ -82,10 +82,20 @@ trait AuthenticatesAndRegistersUsers {
 		}
 
 		return redirect($this->loginPath())
-					->withInput($request->only('email'))
+					->withInput($request->only('email', 'remember'))
 					->withErrors([
-						'email' => 'These credentials do not match our records.',
+						'email' => $this->getFailedLoginMesssage(),
 					]);
+	}
+
+	/**
+	 * Get the failed login message.
+	 *
+	 * @return string
+	 */
+	protected function getFailedLoginMesssage()
+	{
+		return 'These credentials do not match our records.';
 	}
 
 	/**

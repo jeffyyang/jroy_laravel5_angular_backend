@@ -1,6 +1,6 @@
 <?php namespace App\Models;
 
-use helpers\Tree;
+use App\Helpers\Tree;
 
 class Category_cms extends Selfvalidator {
 

@@ -4,6 +4,8 @@ var backend_path = 'modules/backend/';
 var static_path = 'static/';
 var backend_url = base_url;
 var default_tpl = is_login?'app/dashboard':'auth/signin';
+//全站消息
+var message = '';
 
 if(!is_login){
     window.location.href=base_url+'#auth/signin';
@@ -89,16 +91,6 @@ var app = angular.module('app', [
                         }]
                 }
             })
-            .state('app.db', {
-                url: '/db',
-                templateUrl: backend_path+'tpl/db/list.html',
-                resolve: {
-                    deps: ['uiLoad',
-                        function( uiLoad ){
-                            return uiLoad.load( [backend_path+'js/app/libs/db.js']);
-                        }]
-                }
-            })
 
             //授权管理
             //================================================================
@@ -153,7 +145,7 @@ var app = angular.module('app', [
             .state('app.banner', {
                 url: '/banner',
                 abstract: true,
-                template: '<div ui-view class="fade-in" ng-controller="BannerCtrl"></div>',
+                template: '<div ui-view class="fade-in-top-big" ng-controller="BannerCtrl"></div>',
                 resolve: {
                     deps: ['uiLoad',function( uiLoad ){
                             return uiLoad.load( [backend_path+'js/app/libs/banner.js', backend_path+'js/app/libs/service.js']);
@@ -183,7 +175,7 @@ var app = angular.module('app', [
             .state('app.user', {
                 abstract: true,
                 url: '/user',
-                template: '<div ui-view class="fade-in" ng-controller="UserCtrl"></div>',
+                template: '<div ui-view class="fade-in-down smooth" ng-controller="UserCtrl"></div>',
                 // use resolve to load other dependences
                 resolve: {
                     deps: ['uiLoad',
@@ -255,7 +247,7 @@ var app = angular.module('app', [
             })
             .state('app.cms.post', {
                 url: '/post',
-                template: '<div ui-view class="fade-in-up"></div>'
+                template: '<div ui-view class="fade-in-down"></div>'
             })
             .state('app.cms.post.list', {
                 url: '/list',
@@ -273,7 +265,7 @@ var app = angular.module('app', [
             //栏目管理
             .state('app.cms.category', {
                 url: '/category',
-                template: '<div ui-view class="fade-in-up"></div>'
+                template: '<div ui-view class="fade-in-right"></div>'
             })
             .state('app.cms.category.list', {
                 url: '/list',

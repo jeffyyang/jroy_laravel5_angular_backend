@@ -1,7 +1,5 @@
 <?php namespace Modules\Cms\Helpers\Taging;
 
-use Illuminate\Support\Str;
-
 trait TaggableTrait {
 
     public $namespace =  'Modules\Cms\Helpers\Taging';
@@ -132,7 +130,7 @@ trait TaggableTrait {
 		if($previousCount >= 1) { return; }
 		
 		$displayer = \Config::get('tagging::displayer');
-		$displayer = empty($displayer) ? '\Str::title' : $displayer;
+		$displayer = empty($displayer) ? 'Illuminate\Support\Str::title' : $displayer;
 		
 		$tagged = new Tagged(array(
 			'tag_name'=>call_user_func($displayer, $tagName),

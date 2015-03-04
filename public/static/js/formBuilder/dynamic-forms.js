@@ -484,7 +484,7 @@ angular.module('dynform', ['ui.load'])
                             //newElement = newElement.wrap('<div class="col-sm-8"></div>').parent();
                             addPanel = addPanel.append(element.contents());
                             newElement.append(addPanel);
-                            newElement.append('<footer class="panel-footer text-left bg-light lter"><button type="submit" class="btn btn-success" ng-disabled="form.$invalid" ng-click="onSubmit()">提交</button><span class="m-l-sm">{{ message }}</span></footer>');
+                            newElement.append('<footer class="panel-footer text-left bg-light lter"><button type="submit" class="btn btn-success" ng-disabled="form.$invalid" ng-click="onSubmit()">提交</button><strong class="m-l-sm">{{ $root.message }}</strong></footer>');
 
                             //  onReset logic
                             newElement.data('$_cleanModel', angular.copy(model));

@@ -3,6 +3,7 @@
 use Exception;
 use Illuminate\Routing\Router;
 use Illuminate\Pipeline\Pipeline;
+use Illuminate\Support\Facades\Facade;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\TerminableMiddleware;
 use Illuminate\Contracts\Http\Kernel as KernelContract;
@@ -100,6 +101,8 @@ class Kernel implements KernelContract {
 	{
 		$this->app->instance('request', $request);
 
+		Facade::clearResolvedInstance('request');
+
 		$this->bootstrap();
 
 		return (new Pipeline($this->app))
@@ -117,7 +120,9 @@ class Kernel implements KernelContract {
 	 */
 	public function terminate($request, $response)
 	{
-		foreach ($this->middleware as $middleware)
+		$routeMiddlewares = $this->gatherRouteMiddlewares($request);
+
+		foreach (array_merge($routeMiddlewares, $this->middleware) as $middleware)
 		{
 			$instance = $this->app->make($middleware);
 
@@ -128,6 +133,22 @@ class Kernel implements KernelContract {
 		}
 
 		$this->app->terminate();
+	}
+
+	/**
+	 * Gather the route middleware for the given request.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return array
+	 */
+	protected function gatherRouteMiddlewares($request)
+	{
+		if ($request->route())
+		{
+			return $this->router->gatherRouteMiddlewares($request->route());
+		}
+
+		return [];
 	}
 
 	/**

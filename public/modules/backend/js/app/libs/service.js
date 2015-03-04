@@ -4,6 +4,9 @@ app.factory('fdatas', ['$http', '$state', '$rootScope', function ($http, $rootSc
   var path = '';
   var factory = {};
   var attr = '';
+  var msg = '';
+
+  $rootScope.message = '';
 
   factory.init = function (model){
       path = backend_url+'/'+model;
@@ -83,7 +86,7 @@ app.factory('fdatas', ['$http', '$state', '$rootScope', function ($http, $rootSc
 
   factory.createCate = function (data) {
       return $http.post(path+'/store-cate', data).then(function(resp){
-         return resp.data.status;
+          return resp.data;
      });
   };
 

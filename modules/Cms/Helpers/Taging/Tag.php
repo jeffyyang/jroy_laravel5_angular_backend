@@ -18,7 +18,7 @@ class Tag extends Model {
 		parent::__construct($attributes);
 
         $this->normalizer = $this->namespace.'\TaggingUtil::slug';
-        $this->displayer = '\Str::title';
+        $this->displayer = 'Illuminate\Support\Str::title';
 	}
 	
 	public function save(array $options = array()) {

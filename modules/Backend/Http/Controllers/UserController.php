@@ -1,20 +1,23 @@
 <?php namespace Modules\Backend\Http\Controllers;
 
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Response;
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use Illuminate\Support\Facades\Input;
-use User;
+use App\Models\User;
 
 class UserController extends Controller {
 
+    protected $user;
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
     /**
      * @return \Illuminate\Http\JsonResponse
      */
     public function getIndex()
 	{
-        $data = User::paginate(10)->toArray();
-        return Response::json($data);
+        $data = $this->user->paginate(10)->toArray();
+        return response()->json($data);
 	}
 
     /**
@@ -24,7 +27,7 @@ class UserController extends Controller {
     public function getEdit($id)
     {
         $data = ['data' =>Sentry::findUserById($id)];
-        return Response::json($data);
+        return response()->json($data);
     }
 
     /**
@@ -42,9 +45,9 @@ class UserController extends Controller {
         Uinfo::create(['uid'=>$user->id]);
 
         if($user){
-            return Response::json(['status'=>1]);
+            return response()->json(['status'=>1]);
         }else{
-            return Response::json(['status'=>0]);
+            return response()->json(['status'=>0]);
         }
     }
 
@@ -60,9 +63,9 @@ class UserController extends Controller {
         $user->email = $user->username = $data['email'];
         $user->activated = $data['activated'];
         if($user->save()){
-            return Response::json(['status'=>1]);
+            return response()->json(['status'=>1]);
         }else{
-            return Response::json(['status'=>0]);
+            return response()->json(['status'=>0]);
         }
 
     }
@@ -76,13 +79,13 @@ class UserController extends Controller {
         $user = Sentry::findUserById($id);
         $status = $user->delete()?1:0;
 
-        return Response::json(['status'=>$status]);
+        return response()->json(['status'=>$status]);
     }
 
     public function getAttr()
     {
         $user = new User;
-        return Response::json(['data'=>$user->getAttr()]);
+        return response()->json(['data'=>$user->getAttr()]);
     }
 
 	

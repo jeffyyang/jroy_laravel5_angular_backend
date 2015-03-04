@@ -159,9 +159,11 @@ app.controller('CmsCategoryAddCtrl', ['$scope', '$state', 'fdatas','$rootScope',
         $scope.stdFormData.thumb = $scope.dropzones.id;
         //无上级目录时为0
         if(!angular.isDefined($scope.stdFormData.pid)) $scope.stdFormData.pid = 0;
-        fdatas.createCate($scope.stdFormData).then(function(status){
-            if(status){
+        fdatas.createCate($scope.stdFormData).then(function(data){
+            if(data.status){
                 $state.go('app.cms.category.list');
+            }else{
+                $rootScope.message = data.message;
             }
         });
     }

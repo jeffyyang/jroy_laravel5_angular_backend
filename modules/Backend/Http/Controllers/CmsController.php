@@ -3,10 +3,12 @@
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Response;
-use Cartalyst\Sentry\Facades\Laravel\Sentry;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\Category_cms;
+use App\User;
 
 class CmsController extends Controller {
 
@@ -25,7 +27,7 @@ class CmsController extends Controller {
 	{
         $posts = $this->post->all();
         foreach ($posts as $k=>$v) {
-            $posts[$k]['author'] = Sentry::findUserById($v->uid)->username;
+            $posts[$k]['author'] = User::find($v->uid)->username;
         }
         return Response::json($posts);
 	}
@@ -48,7 +50,7 @@ class CmsController extends Controller {
      */
     public function postStore()
     {
-        $data = array_add(Input::all(),'uid',Sentry::getUser()->id);
+        $data = array_add(Input::all(),'uid',Auth::user()->id);
         $post = $this->post->create($data);
 
         //tag处理
@@ -126,6 +128,10 @@ class CmsController extends Controller {
      */
     public function postStoreCate()
     {
+        $exist = $this->category->where('slug', Request::input('slug'))->first();
+        if($exist){
+            return Response::json(['status'=>0, 'message'=>'Slug已存在']);
+        }
         $category = $this->category->create(Input::all());
         return Response::json(['status'=>$category?1:0]);
     }

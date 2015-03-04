@@ -3,6 +3,7 @@
 use Exception;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Console\Application as ConsoleApplication;
 use Symfony\Component\Debug\ExceptionHandler as SymfonyDisplayer;
 use Illuminate\Contracts\Debug\ExceptionHandler as ExceptionHandlerContract;
 
@@ -41,10 +42,20 @@ class Handler implements ExceptionHandlerContract {
 	 */
 	public function report(Exception $e)
 	{
-		if ($this->shouldntReport($e))
-			return;
+		if ($this->shouldntReport($e)) return;
 
 		$this->log->error((string) $e);
+	}
+
+	/**
+	 * Determine if the exception should be reported.
+	 *
+	 * @param  \Exception  $e
+	 * @return bool
+	 */
+	public function shouldReport(Exception $e)
+	{
+		return ! $this->shouldntReport($e);
 	}
 
 	/**
@@ -57,8 +68,7 @@ class Handler implements ExceptionHandlerContract {
 	{
 		foreach ($this->dontReport as $type)
 		{
-			if ($e instanceof $type)
-				return true;
+			if ($e instanceof $type) return true;
 		}
 	}
 
@@ -90,7 +100,7 @@ class Handler implements ExceptionHandlerContract {
 	 */
 	public function renderForConsole($output, Exception $e)
 	{
-		$output->writeln((string) $e);
+		(new ConsoleApplication)->renderException($e, $output);
 	}
 
 	/**
@@ -101,9 +111,11 @@ class Handler implements ExceptionHandlerContract {
 	 */
 	protected function renderHttpException(HttpException $e)
 	{
-		if (view()->exists('errors.'.$e->getStatusCode()))
+		$status = $e->getStatusCode();
+
+		if (view()->exists("errors.{$status}"))
 		{
-			return response()->view('errors.'.$e->getStatusCode(), [], $e->getStatusCode());
+			return response()->view("errors.{$status}", [], $status);
 		}
 		else
 		{

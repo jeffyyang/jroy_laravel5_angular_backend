@@ -14,17 +14,9 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
-		$this->initSetting();
 		$this->call('UserTableSeeder');
 	}
 
-	public function initSetting()
-	{
-		DB::table('setting')->insert([
-			['key'=>'global_title', 'value'=>'zAdmin'],
-			['key'=>'global_keyword', 'value'=>'zAdmin'],
-			['key'=>'global_description', 'value'=>'zAdmin']
-		]);
-	}
+	
 
 }
