@@ -1,4 +1,5 @@
 /bootstrap/compiled.php
+.c9/*
 .idea/*
 .env.*.php
 .env.php
