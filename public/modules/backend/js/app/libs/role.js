@@ -1,12 +1,12 @@
-app.controller('UsergroupCtrl', ['$scope','fdatas', function($scope, fdatas) {
+app.controller('RoleCtrl', ['$scope','fdatas', function($scope, fdatas) {
 
-    fdatas.init('usergroup');
+    fdatas.init('role');
 
 }]);
 
-app.controller('UsergroupListCtrl', ['$scope', 'fdatas', '$state', function($scope, fdatas, $state) {
-    fdatas.all().then(function(usergroups){
-        $scope.usergroups = usergroups;
+app.controller('RoleListCtrl', ['$scope', 'fdatas', '$state', function($scope, fdatas, $state) {
+    fdatas.all().then(function(roles){
+        $scope.roles = roles;
     });
 
     $scope.delete = function($id) {
@@ -21,28 +21,28 @@ app.controller('UsergroupListCtrl', ['$scope', 'fdatas', '$state', function($sco
     }
 }]);
 
-app.controller('UsergroupEditCtrl', ['$scope', 'fdatas', '$stateParams', '$state', function($scope, fdatas, $stateParams, $state) {
+app.controller('RoleEditCtrl', ['$scope', 'fdatas', '$stateParams', '$state', function($scope, fdatas, $stateParams, $state) {
 
     $scope.stdFormTemplate = fdatas.getAttr();
-    fdatas.get($stateParams.id).then(function(usergroup){
-        $scope.stdFormData = usergroup;
+    fdatas.get($stateParams.id).then(function(role){
+        $scope.stdFormData = role;
     });
 
     $scope.urlFormData = {};
-    $scope.usergroup={};
+    $scope.role={};
     $scope.onSubmit = function() {
         $scope.errors = null;
 
         fdatas.update($stateParams.id, $scope.stdFormData).then(function(status){
             if(status){
-                $state.go('app.usergroup.list');
+                $state.go('app.role.list');
             }
         });
     }
 
 }]);
 
-app.controller('UsergroupAddCtrl', ['$scope', '$state', 'fdatas', function($scope, $state, fdatas) {
+app.controller('RoleAddCtrl', ['$scope', '$state', 'fdatas', function($scope, $state, fdatas) {
 
     //获取模型属性
     $scope.stdFormTemplate = fdatas.getAttr();
@@ -54,18 +54,17 @@ app.controller('UsergroupAddCtrl', ['$scope', '$state', 'fdatas', function($scop
         $scope.errors = null;
         fdatas.create($scope.stdFormData).then(function(status){
             if(status){
-                $state.go('app.usergroup.list');
+                $state.go('app.role.list');
             }
         });
     }
 }]);
 
-app.controller('UsergroupAccessCtrl', ['$scope', 'groupAccess', '$stateParams', '$state', function($scope, groupAccess, $stateParams, $state) {
+app.controller('RoleAccessCtrl', ['$scope', 'groupAccess', '$stateParams', '$state', function($scope, groupAccess, $stateParams, $state) {
 
     $scope.stdFormTemplate = groupAccess.getGroupAccessAttr();
-
-    groupAccess.getAccess($stateParams.id).then(function(usergroup){
-        $scope.stdFormData = usergroup;
+    groupAccess.getAccess($stateParams.id).then(function(role){
+        $scope.stdFormData = role;
     });
 
     $scope.onSubmit = function(){
@@ -73,7 +72,7 @@ app.controller('UsergroupAccessCtrl', ['$scope', 'groupAccess', '$stateParams', 
 
         groupAccess.updateAccess($stateParams.id, $scope.stdFormData).then(function(status){
             if(status){
-                $state.go('app.usergroup.list');
+                $state.go('app.role.list');
             }
         });
     }
@@ -81,7 +80,7 @@ app.controller('UsergroupAccessCtrl', ['$scope', 'groupAccess', '$stateParams', 
 }]);
 
 //用户组成员管理
-app.controller('UsergroupMembersCtrl', ['$scope', 'groupAccess', '$stateParams', '$state', function($scope, groupAccess, $stateParams, $state) {
+app.controller('RoleMembersCtrl', ['$scope', 'groupAccess', '$stateParams', '$state', function($scope, groupAccess, $stateParams, $state) {
 
     groupAccess.groupMembersall($stateParams.id).then(function(userGroupMembers){
         $scope.userGroupMembers = userGroupMembers;
@@ -113,38 +112,37 @@ app.factory('groupAccess', ['$http', function ($http) {
 
     //获取所有权限列表
     factory.getGroupAccessAttr = function (){
-        return $http.get(backend_url + '/usergroup/access-attr').then(function (resp){
+        return $http.get(backend_url + '/role/access-attr').then(function (resp){
             return resp.data.data;
         });
     };
 
     //获取当前用户组权限
     factory.getAccess = function (id){
-        var fdata = $http.get(backend_url+'/usergroup/access/'+id).then(function (resp){
+        var fdata = $http.get(backend_url+'/role/access/'+id).then(function (resp){
             return resp.data.data;
         });
         return fdata;
     };
 
     factory.updateAccess = function(id, data){
-        var status = $http.put(backend_url + '/usergroup/access/'+id, data).then(function (resp){
+        var status = $http.put(backend_url + '/role/access/'+id, data).then(function (resp){
             return resp.data.status;
         });
         return status; 
     };
 
     factory.groupMembersall = function(id){
-        return $http.get(backend_url + '/usergroup/members/'+id).then(function (resp){
+        return $http.get(backend_url + '/role/members/'+id).then(function (resp){
             return resp.data.data;
         });
     };
 
     //解除授权
-    factory.cancelAccess = function(id, groupid) {
-        var fdata = $http.get(backend_url+'/usergroup/cancel-access/'+id+'/?group_id='+groupid).then(function (resp){
+    factory.cancelAccess = function(id, role_id) {
+        return $http.get(backend_url+'/role/cancel-access/'+id+'/?role_id='+role_id).then(function (resp){
            return resp.data.status;
         });
-        return fdata;
     }
 
     return factory;

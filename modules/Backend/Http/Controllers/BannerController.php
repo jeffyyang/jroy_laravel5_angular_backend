@@ -29,7 +29,7 @@ class BannerController extends Controller {
                 $data['data'][$k]['banner'] = \Uploader::select(['id','path'])->find($v['banner']);
             }
         }
-        return Response::json($data);
+        return response()->json($data);
     }
 
     /**
@@ -39,7 +39,7 @@ class BannerController extends Controller {
     public function getEdit($id)
     {
         $data = ['data' =>$this->banner->find($id)];
-        return Response::json($data);
+        return response()->json($data);
     }
 
     /**
@@ -50,9 +50,9 @@ class BannerController extends Controller {
         $banner = $this->banner->create(Input::all());
 
         if($banner){
-            return Response::json(['status'=>1]);
+            return response()->json(['status'=>1]);
         }else{
-            return Response::json(['status'=>0]);
+            return response()->json(['status'=>0]);
         }
     }
 
@@ -65,9 +65,9 @@ class BannerController extends Controller {
         $banner = $this->banner->find($id);
         $banner->fill(Input::all());
         if($banner->save()){
-            return Response::json(['status'=>1]);
+            return response()->json(['status'=>1]);
         }else{
-            return Response::json(['status'=>0]);
+            return response()->json(['status'=>0]);
         }
 
     }
@@ -79,12 +79,12 @@ class BannerController extends Controller {
     public function deleteDestroy($id)
     {
         $banner = $this->banner->find($id);
-        return Response::json(['status'=>$banner->delete()?1:0]);
+        return response()->json(['status'=>$banner->delete()?1:0]);
     }
 
     public function getAttr()
     {
-        return Response::json(['data'=>(new \Banner)->getAttr()]);
+        return response()->json(['data'=>(new \Banner)->getAttr()]);
     }
 
 

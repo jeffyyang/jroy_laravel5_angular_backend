@@ -97,7 +97,6 @@ angular.module('app.controllers', ['pascalprecht.translate', 'ngCookies', 'dynfo
 
             $scope.load = function () {
                 $http.get(backend_url + '/user/?page='+$scope.currentPage).then(function(items) {
-
                     items.data.data.shift();
                     angular.forEach(items.data.data, function(item){
                         return item.checked = false;
@@ -172,7 +171,7 @@ angular.module('app.controllers', ['pascalprecht.translate', 'ngCookies', 'dynfo
           });
 
           modalInstance.result.then(function (selectedItems) {
-              $http.put(backend_url+'/usergroup/add-member-to-group/'+$stateParams.id, selectedItems).then(function(resp){
+              $http.put(backend_url+'/role/add-member-role/'+$stateParams.id, selectedItems).then(function(resp){
                    $scope.status = resp.data.status;
                    $state.go($state.current, {}, {reload: true});
               });
@@ -195,13 +194,13 @@ angular.module('app.controllers', ['pascalprecht.translate', 'ngCookies', 'dynfo
           $http.post(backend_url + '/auth/login', {email: $scope.user.email, password: $scope.user.password})
           .then(function(response) {
             if ( !response.data.status ) {
-              $scope.error = response.data.error;
+              $scope.message = response.data.message;
             }else{
                 $scope.success = '登陆成功';
                 $state.go('app.dashboard');
             }
           }, function(x) {
-            $scope.error = '用户名或密码不正确！';
+            $scope.message = '用户名或密码不正确！';
           });
         };
       }])

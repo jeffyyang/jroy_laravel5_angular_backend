@@ -2,7 +2,7 @@
 <div class="bg-light lter b-b wrapper-xs ng-scope">
     <ul class="breadcrumb">
         <li><a ui-sref="app.dashboard"><i class="fa fa-home"></i> 首页</a></li>
-        <li><a ui-sref="app.usergroup.list">会员组列表</a></li>
+        <li><a ui-sref="app.role.list">会员组列表</a></li>
         <li class="active">授权会员列表</li>
     </ul>
 </div>
@@ -15,7 +15,7 @@
         <div class="panel-body b-b b-light">
             Search: <input id="filter" type="text" class="form-control input-sm w-sm inline m-r"/>
         </div>
-        <div ng-controller="UsergroupMembersCtrl">
+        <div ng-controller="RoleMembersCtrl">
             <table class="table m-b-none" ui-jq="footable" data-filter="#filter" data-page-size="5">
                 <thead>
                 <tr>
@@ -28,6 +28,9 @@
                 </tr>
                 </thead>
                 <tbody>
+                <tr ng-hide='userGroupMembers.length>-1'>
+                    <td colspan=6 align=center><i class="fa fa-spinner fa-pulse"></i>&nbsp;正在加载...</td>
+                </tr>
                 <tr ng-repeat="user in userGroupMembers">
                     <td>{{ user.id }}</td>
                     <td>{{ user.email }}</td>

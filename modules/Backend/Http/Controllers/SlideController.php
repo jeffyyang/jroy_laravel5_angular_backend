@@ -16,7 +16,7 @@ class SlideController extends Controller {
     public function getIndex()
     {
         $data = $this->slide->paginate(10)->toArray();
-        return Response::json($data);
+        return response()->json($data);
     }
 
     /**
@@ -26,7 +26,7 @@ class SlideController extends Controller {
     public function getEdit($id)
     {
         $data = ['data' =>$this->slide->find($id)];
-        return Response::json($data);
+        return response()->json($data);
     }
 
     /**
@@ -38,9 +38,9 @@ class SlideController extends Controller {
         $slide = $this->slide->create(Input::all());
 
         if($slide){
-            return Response::json(['status'=>1]);
+            return response()->json(['status'=>1]);
         }else{
-            return Response::json(['status'=>0]);
+            return response()->json(['status'=>0]);
         }
     }
 
@@ -53,9 +53,9 @@ class SlideController extends Controller {
         $slide = $this->slide->find($id);
         $slide->fill(Input::all());
         if($slide->save()){
-            return Response::json(['status'=>1]);
+            return response()->json(['status'=>1]);
         }else{
-            return Response::json(['status'=>0]);
+            return response()->json(['status'=>0]);
         }
 
     }
@@ -67,12 +67,12 @@ class SlideController extends Controller {
     public function deleteDestroy($id)
     {
         $slide = $this->slide->find($id);
-        return Response::json(['status'=>$slide->delete()?1:0]);
+        return response()->json(['status'=>$slide->delete()?1:0]);
     }
 
     public function getAttr()
     {
-        return Response::json(['data'=>(new \Slide)->getAttr()]);
+        return response()->json(['data'=>(new \Slide)->getAttr()]);
     }
 
 

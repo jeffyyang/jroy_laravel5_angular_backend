@@ -5,10 +5,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Bican\Roles\Contracts\HasRoleContract;
+use Bican\Roles\Contracts\HasPermissionContract;
+use Bican\Roles\Traits\HasRole;
+use Bican\Roles\Traits\HasPermission;
+use Auth;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract, HasRoleContract, HasPermissionContract {
 
-	use Authenticatable, CanResetPassword;
+	use Authenticatable, CanResetPassword, HasRole, HasPermission;
 
 	/**
 	 * The database table used by the model.
@@ -31,6 +36,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+    public function isAdminLogin()
+    {
+        if(!Auth::check() || !Auth::user()->is('admin')){
+            return false;
+        }
+        return true;
+    }
+
 	public function getAttr()
     {
         return [
@@ -38,9 +51,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
                 'type'  =>'text',
                 'label' =>'邮箱'
             ],
-            'truename' =>[
+            'name' =>[
                 'type'  =>'text',
-                'label' =>'真实姓名'
+                'label' =>'用户名'
             ],
             'password'=>[
                 'type'  =>'password',

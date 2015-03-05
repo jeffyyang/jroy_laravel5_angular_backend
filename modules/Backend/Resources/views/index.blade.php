@@ -39,7 +39,7 @@
     });
 
     var base_url = '{{ route("backend") }}';
-    var is_login = '{{ \Auth::check() }}';
+    var is_login = '{{ (new App\Models\User)->isAdminLogin() }}';
   </script>
 
   <script src="modules/backend/js/app.js"></script>

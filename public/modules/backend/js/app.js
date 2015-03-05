@@ -198,37 +198,37 @@ var app = angular.module('app', [
             })
 
             //用户组
-            .state('app.usergroup', {
+            .state('app.role', {
                 abstract: true,
-                url: '/usergroup',
-                templateUrl: backend_path+'tpl/usergroup/index.html',
+                url: '/role',
+                template: '<div ui-view class="fade-in-right-big smooth" ng-controller="RoleCtrl"></div>',
                 // use resolve to load other dependences
                 resolve: {
                     deps: ['uiLoad',
                         function( uiLoad ){
-                            return uiLoad.load( [backend_path+'js/app/libs/usergroup.js', backend_path+'js/app/libs/service.js']);
+                            return uiLoad.load( [backend_path+'js/app/libs/role.js', backend_path+'js/app/libs/service.js']);
                         }]
                 }
             })
-            .state('app.usergroup.list', {
+            .state('app.role.list', {
                 url: '/list',
-                templateUrl: backend_path+'tpl/usergroup/list.html'
+                templateUrl: backend_path+'tpl/role/list.html'
             })
-            .state('app.usergroup.edit', {
+            .state('app.role.edit', {
                 url: '/edit/{id:[0-9]+}',
-                templateUrl: backend_path+'tpl/usergroup/edit.html'
+                templateUrl: backend_path+'tpl/role/edit.html'
             })
-            .state('app.usergroup.add', {
+            .state('app.role.add', {
                 url: '/add',
-                templateUrl: backend_path+'tpl/usergroup/add.html'
+                templateUrl: backend_path+'tpl/role/add.html'
             })
-            .state('app.usergroup.access', {
+            .state('app.role.access', {
                 url: '/access/{id:[0-9]+}',
-                templateUrl: backend_path+'tpl/usergroup/access.html'
+                templateUrl: backend_path+'tpl/role/access.html'
             })
-            .state('app.usergroup.members', {
+            .state('app.role.members', {
                 url: '/members/{id:[0-9]+}',
-                templateUrl: backend_path+'tpl/usergroup/members.html'
+                templateUrl: backend_path+'tpl/role/members.html'
             })
 
             //资讯
@@ -236,7 +236,7 @@ var app = angular.module('app', [
             .state('app.cms', {
                 abstract: true,
                 url: '/cms',
-                templateUrl: backend_path+'tpl/cms/index.html',
+                template: '<div ui-view class="fade-in-right-big smooth"  ng-controller="CmsCtrl"></div>',
                 // use resolve to load other dependences
                 resolve: {
                     deps: ['uiLoad',

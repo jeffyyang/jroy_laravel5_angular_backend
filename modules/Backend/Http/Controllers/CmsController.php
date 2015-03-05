@@ -29,7 +29,7 @@ class CmsController extends Controller {
         foreach ($posts as $k=>$v) {
             $posts[$k]['author'] = User::find($v->uid)->username;
         }
-        return Response::json($posts);
+        return response()->json($posts);
 	}
 
     /**
@@ -42,7 +42,7 @@ class CmsController extends Controller {
         $post->tag = $post->tagNames();
 
         $data = ['data' =>$post];
-        return Response::json($data);
+        return response()->json($data);
     }
 
     /**
@@ -58,7 +58,7 @@ class CmsController extends Controller {
         if(count($tags) > 0){
             $post->tag($tags);
         }
-        return Response::json(['status'=>$post?1:0]);
+        return response()->json(['status'=>$post?1:0]);
     }
 
     /**
@@ -74,7 +74,7 @@ class CmsController extends Controller {
             $post->retag($tags);
         }
         $post->fill(Input::all());
-        return Response::json(['status'=>$post->save()?1:0]);
+        return response()->json(['status'=>$post->save()?1:0]);
     }
 
     /**
@@ -84,12 +84,12 @@ class CmsController extends Controller {
     public function deleteDestroy($id)
     {
         $post = $this->post->find($id);
-        return Response::json(['status'=>$post->delete()?1:0]);
+        return response()->json(['status'=>$post->delete()?1:0]);
     }
 
     public function getAttr()
     {
-        return Response::json(['data'=>$this->post->getAttr()]);
+        return response()->json(['data'=>$this->post->getAttr()]);
     }
 
     /**
@@ -99,13 +99,13 @@ class CmsController extends Controller {
     public function getAllCate()
     {
         $categories = $this->category->all();
-        return Response::json(['data'=>$categories]);
+        return response()->json(['data'=>$categories]);
     }
 
     public function getListCate($pid)
     {
         $sub_cate = $this->category->select(['id','pid','name'])->where('pid', $pid)->get();
-        return Response::json(['data'=>$sub_cate]);
+        return response()->json(['data'=>$sub_cate]);
     }
 
     /**
@@ -120,7 +120,7 @@ class CmsController extends Controller {
             $thumb = Uploader::where('id',$data->thumb)->select(['id','name','path'])->first();
             $data->thumb = $thumb?$thumb:'';
         }
-        return Response::json(['data'=>$data]);
+        return response()->json(['data'=>$data]);
     }
 
     /**
@@ -130,10 +130,10 @@ class CmsController extends Controller {
     {
         $exist = $this->category->where('slug', Request::input('slug'))->first();
         if($exist){
-            return Response::json(['status'=>0, 'message'=>'Slug已存在']);
+            return response()->json(['status'=>0, 'message'=>'Slug已存在']);
         }
         $category = $this->category->create(Input::all());
-        return Response::json(['status'=>$category?1:0]);
+        return response()->json(['status'=>$category?1:0]);
     }
 
     /**
@@ -144,7 +144,7 @@ class CmsController extends Controller {
     {
         $category = $this->category->find($id);
         $category->fill(Input::all());
-        return Response::json(['status'=>$category->save()?1:0]);
+        return response()->json(['status'=>$category->save()?1:0]);
     }
 
     /**
@@ -154,7 +154,7 @@ class CmsController extends Controller {
     public function deleteDestroyCate($id)
     {
         $category = $this->category->find($id);
-        return Response::json(['status'=>$category->delete()?1:0]);
+        return response()->json(['status'=>$category->delete()?1:0]);
     }
 
     /**
@@ -162,6 +162,6 @@ class CmsController extends Controller {
      */
     public function getAttrCate()
     {
-        return Response::json(['data'=>$this->category->getAttr()]);
+        return response()->json(['data'=>$this->category->getAttr()]);
     }	
 }

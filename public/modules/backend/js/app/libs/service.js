@@ -4,9 +4,6 @@ app.factory('fdatas', ['$http', '$state', '$rootScope', function ($http, $rootSc
   var path = '';
   var factory = {};
   var attr = '';
-  var msg = '';
-
-  $rootScope.message = '';
 
   factory.init = function (model){
       path = backend_url+'/'+model;
@@ -21,7 +18,7 @@ app.factory('fdatas', ['$http', '$state', '$rootScope', function ($http, $rootSc
 
   factory.list = function (page) {
       return  $http.get(path+'/?page='+page).then(function (resp) {
-        return resp.data;
+          return resp.data;
       });
   };
 
@@ -33,13 +30,13 @@ app.factory('fdatas', ['$http', '$state', '$rootScope', function ($http, $rootSc
 
   factory.update = function (id, data) {
       return $http.put(path+'/update/'+id, data).then(function(resp){
-            return resp.data.status;
+          return resp.data.status;
      });
   };
 
   factory.create = function (data) {
       return $http.post(path+'/store', data).then(function(resp){
-         return resp.data.status;
+         return resp.data;
      });
   };
 
@@ -52,7 +49,7 @@ app.factory('fdatas', ['$http', '$state', '$rootScope', function ($http, $rootSc
   factory.getAttr = function () {
       if(!angular.isDefined($rootScope[attr])){
           $rootScope[attr] = $http.get(path+'/attr').then(function (resp){
-            return resp.data.data;
+              return resp.data.data;
           });
       }
       return $rootScope[attr];

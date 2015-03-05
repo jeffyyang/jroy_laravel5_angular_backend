@@ -102,11 +102,13 @@ app.controller('UserAddCtrl', ['$scope', '$state', 'fdatas','$rootScope', functi
     $scope.urlFormData = {};
 
     //提交添加
-    $scope.postAdd = function(){
+    $scope.onSubmit = function(){
         $scope.errors = null;
-        fdatas.create($scope.stdFormData).then(function(status){
-            if(status){
+        fdatas.create($scope.stdFormData).then(function(data){
+            if(data.status){
                 $state.go('app.user.list');
+            }else{
+                $rootScope.message = data.message;
             }
         });
     }
