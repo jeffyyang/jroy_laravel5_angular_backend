@@ -39,8 +39,7 @@ class Admin {
 			$this->auth->logout();
 			if ($request->ajax())
 			{
-				return response()->json(['status'=>0, 'message'=>'未授权']);
-				//return response('Unauthorized.', 401);
+				return response('Unauthorized.', 401);
 			}else{
 				return redirect()->guest('/backend');
 			}
