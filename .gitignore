@@ -2,6 +2,7 @@
 .c9/*
 .idea/*
 .env.*.php
-.env.php
+.env
 .DS_Store
+vendor/*
 Thumbs.db
