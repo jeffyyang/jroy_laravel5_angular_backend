@@ -11,9 +11,50 @@
     <div class="wrapper">
         <div class="panel panel-default">
             <div class="panel-heading font-bold">角色权限管理</div>
-            <dynamic-form class="form-horizontal m-t-lg form-validation" template="stdFormTemplate" ng-model="stdFormData">
+            <div class="panel-body">
 
-            </dynamic-form>
+                <fieldset ng-required="true" required="required">
+                   <legend>shop</legend>
+                   <div class="form-group">
+                    <label class="col-sm-2 control-label">shop.bargain</label>
+                    <div class="col-sm-8">
+                     <div ng-required="true" required="required">
+                      <label class="checkbox-inline"><input type="checkbox" name="shop['bargain']['shop']" ng-model="stdFormData['shop']['bargain']['shop']" class="ng-pristine ng-valid" /> shop</label>
+                      <label class="checkbox-inline"><input type="checkbox" name="shop['bargain']['shop_bargain']" ng-model="stdFormData['shop']['bargain']['shop_bargain']" class="ng-pristine ng-valid" /> shop.bargain</label>
+                     </div>
+                    </div>
+                   </div>
+                </fieldset>
+
+                <fieldset ng-required="true" required="required">
+                   <legend>shop</legend>
+                   <div class="form-group">
+                    <label class="col-sm-2 control-label">shop.bargain</label>
+                    <div class="col-sm-8">
+                     <div ng-required="true" required="required">
+                      <label class="checkbox-inline"><input type="checkbox" name="shop['bargain']['shop']" ng-model="stdFormData['shop']['bargain']['shop']" class="ng-pristine ng-valid" /> shop</label>
+                      <label class="checkbox-inline"><input type="checkbox" name="shop['bargain']['shop_bargain']" ng-model="stdFormData['shop']['bargain']['shop_bargain']" class="ng-pristine ng-valid" /> shop.bargain</label>
+                      <label class="checkbox-inline"><input type="checkbox" name="shop['bargain']['shop_bargain']" ng-model="stdFormData['shop']['bargain']['shop_bargain']" class="ng-pristine ng-valid" /> shop.bargain</label>
+                      <label class="checkbox-inline"><input type="checkbox" name="shop['bargain']['shop_bargain']" ng-model="stdFormData['shop']['bargain']['shop_bargain']" class="ng-pristine ng-valid" /> shop.bargain</label>
+                      <label class="checkbox-inline"><input type="checkbox" name="shop['bargain']['shop']" ng-model="stdFormData['shop']['bargain']['shop']" class="ng-pristine ng-valid" /> shop</label>
+                      <label class="checkbox-inline"><input type="checkbox" name="shop['bargain']['shop_bargain']" ng-model="stdFormData['shop']['bargain']['shop_bargain']" class="ng-pristine ng-valid" /> shop.bargain</label>
+                      <label class="checkbox-inline"><input type="checkbox" name="shop['bargain']['shop_bargain']" ng-model="stdFormData['shop']['bargain']['shop_bargain']" class="ng-pristine ng-valid" /> shop.bargain</label>
+                      <label class="checkbox-inline"><input type="checkbox" name="shop['bargain']['shop_bargain']" ng-model="stdFormData['shop']['bargain']['shop_bargain']" class="ng-pristine ng-valid" /> shop.bargain</label>
+                      <label class="checkbox-inline"><input type="checkbox" name="shop['bargain']['shop']" ng-model="stdFormData['shop']['bargain']['shop']" class="ng-pristine ng-valid" /> shop</label>
+                      <label class="checkbox-inline"><input type="checkbox" name="shop['bargain']['shop_bargain']" ng-model="stdFormData['shop']['bargain']['shop_bargain']" class="ng-pristine ng-valid" /> shop.bargain</label>
+                      <label class="checkbox-inline"><input type="checkbox" name="shop['bargain']['shop_bargain']" ng-model="stdFormData['shop']['bargain']['shop_bargain']" class="ng-pristine ng-valid" /> shop.bargain</label>
+                      <label class="checkbox-inline"><input type="checkbox" name="shop['bargain']['shop_bargain']" ng-model="stdFormData['shop']['bargain']['shop_bargain']" class="ng-pristine ng-valid" /> shop.bargain</label>
+                     </div>
+                    </div>
+                   </div>
+                </fieldset>
+                  
+                
+            </div>
+            <footer class="panel-footer text-left bg-light lter">
+                   <button type="submit" class="btn btn-success" ng-disabled="form.$invalid" ng-click="onSubmit()">提交</button>
+                   <span class="m-l-sm ng-binding"></span>
+            </footer>
         </div>
     </div>
 

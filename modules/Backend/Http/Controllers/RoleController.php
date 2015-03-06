@@ -2,17 +2,23 @@
 
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Route;
 use App\Models\Role;
 use App\Models\User;
+use App\Events\CacheEvent;
+use App\Models\Permission;
 
 
 class RoleController extends Controller {
 
     protected $role;
+    protected $permission;
 
-    public function __construct(Role $role)
+    public function __construct(Role $role, Permission $permission)
     {
         $this->role = $role;
+        $this->permission = $permission;
     }
     /**
      * @return \Illuminate\Http\JsonResponse
@@ -100,5 +106,66 @@ class RoleController extends Controller {
             }
         }
         return response()->json(['status'=>1]);
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAccessAttr()
+    {
+        $route_collection = Route::getRoutes();
+        $routes = [];
+        foreach ($route_collection as $route) {
+            if(!$route->getName() || !$route->getPrefix()) continue;
+            $this->permission->firstOrCreate(['name'=>$route->getName(),'slug'=>$route->getName(),'model'=>$route->getPrefix()]);
+        }
+        return response()->json(['data'=>$this->permission->all()]);
+    }
+
+    public function getAccess($id)
+    {
+        $permissions = $this->role->find($id)->permissions;
+        $routes = Cache::get('routes_simple');
+        foreach(array_flip($routes) as $k=>$v){
+             $allaccess[$k] = isset($permissions[$k])?1:0;
+        }
+
+        foreach ($allaccess as $routename => $v) {
+            $piece = explode('.', $routename);
+            $bool = $v?true:false;
+            if(count($piece) < 2){
+                $access[$piece[0]][$piece[0]] = $bool;
+            }else{
+                $access[$piece[0]][$piece[1]][str_replace('.', '_', $routename)] = $bool;
+            }
+        }
+
+        return response()->json(['data'=>$access]);
+    }
+
+    /**
+     * 更新权限
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function putAccess($id)
+    {
+        foreach (Input::all() as $k=>$model) {
+            if(!is_array($model)) {continue;}
+            foreach ($model as $k2 => $group) {
+                if(!is_array($group)) {
+                    $acclist[$k] = $group;
+                }else{
+                    foreach ($group as $k3 => $option) {
+                        $acclist[str_replace('_', '.', $k3)] = $option;
+                    }
+                }
+            }
+        }
+
+        $group = $this->role->find($id);
+        $group->permissions = $acclist;
+        return Response::json(['status'=>$group->save()?1:0]);
     }
 }

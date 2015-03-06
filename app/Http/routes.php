@@ -16,9 +16,10 @@ Route::get('/show', function(){
 	return view('show');
 });
 
-Route::get('home', 'HomeController@index');
+Route::get('home', ['as'=>'home', 'uses'=>'HomeController@index']);
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+

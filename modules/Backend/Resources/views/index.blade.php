@@ -2,7 +2,7 @@
 <html lang="en" data-ng-app="app">
 <head>
   <meta charset="utf-8" />
-  <title>后台管理系统 | 柚皮网</title>
+  <title>后台管理系统 | Jroy</title>
   <meta name="description" content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="csrf-token" content="{{ csrf_token() }}" />

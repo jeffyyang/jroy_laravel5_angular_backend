@@ -100,7 +100,7 @@ var app = angular.module('app', [
             })
             .state('auth', {
                 url: '/auth',
-                template: '<div ui-view class="fade-in-right-big smooth"></div>',
+                template: '<div ui-view class="fade-in-up smooth"></div>',
             })
             .state('auth.signin', {
                 url: '/signin',
@@ -175,7 +175,7 @@ var app = angular.module('app', [
             .state('app.user', {
                 abstract: true,
                 url: '/user',
-                template: '<div ui-view class="fade-in-down smooth" ng-controller="UserCtrl"></div>',
+                template: '<div ui-view class="fade-in-up smooth" ng-controller="UserCtrl"></div>',
                 // use resolve to load other dependences
                 resolve: {
                     deps: ['uiLoad',
@@ -201,7 +201,7 @@ var app = angular.module('app', [
             .state('app.role', {
                 abstract: true,
                 url: '/role',
-                template: '<div ui-view class="fade-in-right-big smooth" ng-controller="RoleCtrl"></div>',
+                template: '<div ui-view class="fade-in-up smooth" ng-controller="RoleCtrl"></div>',
                 // use resolve to load other dependences
                 resolve: {
                     deps: ['uiLoad',
@@ -236,7 +236,7 @@ var app = angular.module('app', [
             .state('app.cms', {
                 abstract: true,
                 url: '/cms',
-                template: '<div ui-view class="fade-in-right-big smooth"  ng-controller="CmsCtrl"></div>',
+                template: '<div ui-view class="fade-in-up smooth"  ng-controller="CmsCtrl"></div>',
                 // use resolve to load other dependences
                 resolve: {
                     deps: ['uiLoad',
@@ -247,7 +247,7 @@ var app = angular.module('app', [
             })
             .state('app.cms.post', {
                 url: '/post',
-                template: '<div ui-view class="fade-in-down"></div>'
+                template: '<div ui-view class="fade-in-up"></div>'
             })
             .state('app.cms.post.list', {
                 url: '/list',
@@ -265,7 +265,7 @@ var app = angular.module('app', [
             //栏目管理
             .state('app.cms.category', {
                 url: '/category',
-                template: '<div ui-view class="fade-in-right"></div>'
+                template: '<div ui-view class="fade-in-up"></div>'
             })
             .state('app.cms.category.list', {
                 url: '/list',
