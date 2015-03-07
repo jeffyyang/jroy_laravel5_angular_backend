@@ -14,3 +14,12 @@ var elixir = require('laravel-elixir');
 elixir(function(mix) {
     mix.less('app.less');
 });
+
+elixir(function(mix) {
+    mix.stylesIn("public/css");
+});
+
+elixir(function(mix) {
+    mix.version("css/all.css");
+});
+
