@@ -5,7 +5,7 @@
   <title>后台管理系统 | Jroy</title>
   <meta name="description" content="app, web app, responsive, responsive layout, admin, admin panel, admin dashboard, flat, flat ui, ui kit, AngularJS, ui route, charts, widgets, components" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <meta name="csrf-token" content="{{ csrf_token() }}" />
+  <meta name="csrf-token" content="<?php echo csrf_token() ?>" />
   <link rel="stylesheet" href="static/css/bootstrap.css" type="text/css" />
   <link rel="stylesheet" href="static/css/animate.css" type="text/css" />
   <link rel="stylesheet" href="static/css/font-awesome.min.css" type="text/css" />
@@ -38,8 +38,8 @@
         }
     });
 
-    var base_url = '{{ route("backend") }}';
-    var is_login = '{{ (new App\Models\User)->isAdminLogin() }}';
+    var base_url = '<?php echo route("backend") ?>';
+    var is_login = '<?php echo (new App\Models\User)->isAdminLogin() ?>';
   </script>
 
   <script src="modules/backend/js/app.js"></script>
