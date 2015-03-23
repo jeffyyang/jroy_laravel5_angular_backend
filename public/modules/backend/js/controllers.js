@@ -12,7 +12,7 @@ angular.module('app.controllers', ['pascalprecht.translate', 'ngCookies', 'dynfo
 
       // config
       $scope.app = {
-        name: 'zAdmin',
+        name: '公众号管理系统',
         version: '1.1.3',
         author: 'jroy@foxmail.com',
 

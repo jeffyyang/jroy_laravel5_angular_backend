@@ -143,7 +143,9 @@ return [
 		'App\Providers\ConfigServiceProvider',
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
-		
+
+		'App\Providers\Wechat\WechatServiceProvider',
+
 		/* vendor */
 		'Pingpong\Modules\ModulesServiceProvider',
 
@@ -195,6 +197,8 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 
+	    'WeChatServer'    => 'App\Providers\Wechat\Facades\WeChatServer',
+	    'WeChatClient'    => 'App\Providers\Wechat\Facades\WeChatClient',
 	],
 
 ];
