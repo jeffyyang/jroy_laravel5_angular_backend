@@ -197,8 +197,8 @@ return [
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
 
-	    'WeChatServer'    => 'App\Providers\Wechat\Facades\WeChatServer',
-	    'WeChatClient'    => 'App\Providers\Wechat\Facades\WeChatClient',
+    'WeChatServer'    => 'App\Providers\Wechat\Facades\WeChatServer',
+    'WeChatClient'    => 'App\Providers\Wechat\Facades\WeChatClient',
 	],
 
 ];
