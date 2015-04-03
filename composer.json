@@ -8,9 +8,10 @@
 		"laravel/framework": "5.0.*",
 		"pingpong/modules": "1.2.*@dev",
 		"intervention/image": "~2.0",
-        "maatwebsite/excel": "~1.2.1",
-        "davejamesmiller/laravel-breadcrumbs": "2.3.0",
-        "bican/roles": "1.4.*"
+    "maatwebsite/excel": "~1.2.1",
+    "davejamesmiller/laravel-breadcrumbs": "2.3.0",
+    "bican/roles": "1.4.*",
+		"overtrue/laravel-wechat": "dev-master"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

@@ -144,10 +144,11 @@ return [
 		'App\Providers\EventServiceProvider',
 		'App\Providers\RouteServiceProvider',
 
-		'App\Providers\Wechat\WechatServiceProvider',
+		// 'App\Providers\Wechat\WechatServiceProvider',
 
 		/* vendor */
 		'Pingpong\Modules\ModulesServiceProvider',
+		'Overtrue\LaravelWechat\ServiceProvider'
 
 	],
 
