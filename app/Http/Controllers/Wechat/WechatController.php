@@ -1,37 +1,25 @@
-<?php namespace Wechat\Controllers;
+<?php namespace App\Http\Controllers\Wechat;
 
-use Controller;
-use Wechat\WeChatServer;
+use App\Http\Requests;
+use App\Http\Controllers\Controller;
+
+use Illuminate\Http\Request;
+
+use Overtrue\Wechat\Wechat;
 
 class WechatController extends Controller {
 
     /**
-     * 微信
+     * 处理微信的请求消息
      *
-     * @var \Wechat\WeChatServer
+     * @return string
      */
-    protected $weChatServer;
-
-    /**
-     * 构造函数
-     *
-     * @param WeChatServer $weChatServer
-     */
-    public function __construct(WeChatServer $weChatServer)
+    public function serve()
     {
-        $this->weChatServer = $weChatServer;
+        Wechat::on('message', function($message){
+            \Log::info("收到来自'{$message['FromUserName']}'的消息：{$message['Content']}");
+        });
+
+        return Wechat::serve();
     }
-
-    /**
-     * 测试微信功能
-     */
-    function test()
-    {
-        dd($this->weChatServer->getMessage());
-
-        //echo WeChatServer::getXml4Txt('abc');
-
-        exit;
-    }
-
 }
